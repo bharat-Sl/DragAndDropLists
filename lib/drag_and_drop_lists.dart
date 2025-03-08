@@ -253,6 +253,9 @@ class DragAndDropLists extends StatefulWidget {
   /// If [axis] is set to Axis.horizontal, [listWidth] must be set to some finite number.
   final Axis axis;
 
+  /// Determines the physics of the scrollable list.
+  final ScrollPhysics physics;
+
   /// Whether or not to return a widget or a sliver-compatible list.
   /// Set to true if using as a sliver. If true, a [scrollController] must be provided.
   /// Set to false if using in a widget only.
@@ -329,6 +332,7 @@ class DragAndDropLists extends StatefulWidget {
     this.verticalAlignment = CrossAxisAlignment.start,
     this.horizontalAlignment = MainAxisAlignment.start,
     this.axis = Axis.vertical,
+    this.physics = const AlwaysScrollableScrollPhysics(),
     this.sliverList = false,
     this.scrollController,
     this.disableScrolling = false,
@@ -498,6 +502,7 @@ class DragAndDropListsState extends State<DragAndDropLists> {
     Widget listView = ListView(
       scrollDirection: widget.axis,
       controller: _scrollController,
+      physics: widget.physics,
       children: _buildOuterList(dragAndDropListTarget, parameters),
     );
 
